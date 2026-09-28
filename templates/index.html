@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+    {% set image = resize_image(path=section.extra.portrait, width=250, height=250) %}
+    <div class="portrait">
+    <figure class="image is-1by1">
+        <img src="{{image.url}}" class="is-rounded">
+    </figure>
+  </div>
+    <h1 class="title is-1 mt-6 has-text-weight-light">
+      {{ section.title }}
+    </h1>
+    <h2 class="subtitle is-4">{{ section.extra.tagline}}</h2>
+    {% set icons = {"orcid": '<i class="fa-brands fa-orcid fa-xl"></i>', "mastodon": '<i class="fa-brands fa-mastodon fa-xl"></i>', "knowledge commons": '<img class="icon" src="kc.png"></a>'} %}
+    {% if section.extra.email %}
+      <a title="Email" href="mailto:{{section.extra.email}}" class="icon is-medium"><i class="fa-regular fa-envelope fa-xl"></i></a>
+    {% endif %}
+    {% for link in section.extra.links %}  
+      <a title="{{link.account}}" href="{{link.url}}" class="icon is-medium">{% if link.account|lower in icons %}{{icons[link.account|lower]|safe}}{% else %}<i class="fa-solid fa-link is-size-5"></i>{% endif %}</a>
+    {% endfor %}
+    <div class="content is-size-5 mt-6">
+        {{section.content | safe}}
+    </div>
+    {% if section.extra.cv %}
+    <div>
+      <a class="button is-link is-rounded" href="{{section.extra.cv}}">Download CV</a>
+    </div>
+    {% endif %}
+
+    {% set articles = load_data(path="content/articles.json") %}
+    <h3 class="title is-4 mt-6 has-text-weight-light">Selected publications</h3>
+    <ul class="mt-2 content">
+    {% for article in articles | sort(attribute="year") | reverse %}
+      {% set article_path = "@/publications/" ~ article.filename %}
+      <li class="mb-5 is-size-6">{{article.citation | safe}}<br><div class="pt-1 has-text-right">{% if article.oa_status %}<span class="tag is-success is-rounded">{{article.oa_status}}</span> {% endif %}<a class="tag is-link is-rounded" href="{{ get_url(path=article_path) }}">details <span class="icon"><i class="fa-solid fa-chevron-right"></i></span></a></div></li>
+    {% endfor %}
+    </ul>
+    <p><a class="is-size-4" href="{{ get_url(path='@/publications/_index.md')}}">More publications <span class="icon"><i class="fa-solid fa-chevron-right"></i></span></a></p>
+  </div>
+</div>
+{% endblock content %}

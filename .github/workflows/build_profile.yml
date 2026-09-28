@@ -1,0 +1,28 @@
+name: Zola on GitHub Pages
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Publish site
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout main
+      uses: actions/checkout@v7
+    - name: Setup Python
+      uses: actions/setup-python@v7
+      with:
+        python-version: '3.12'
+    - run: pip install -r requirements.txt
+    - name: Prepare data
+      run: python prepare_data.py
+      with:
+        ZOTERO_KEY: ${{ secrets.ZOTERO_KEY }}
+        ZOTERO_ID: ${{ secrets.ZOTERO_ID }}
+    - name: Build and deploy
+      uses: shalzz/zola-deploy-action@v0.23.6
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block meta %}
+{% set home = get_section(path="_index.md") %}
+<title>{{home.title}} - {{ page.title }} - {{page.extra.date}}</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><a href="{{ get_url(path='@/_index.md')}}">Home</a></li>
+        <li><a href="{{ get_url(path='@/publications/_index.md')}}">Publications</a></li>
+      </ul>
+    </nav>
+    <h1 class="title is-2 mt-6 has-text-weight-light">
+      {{ page.title }}
+    </h1>
+    <h2 class="subtitle is-4
+    ">{{ page.extra.date}}</h2>
+    <div class="content">
+        {{page.extra.citation | safe}}
+    </div>
+    <p>{% if page.extra.oa_status == "open access" %}<span class="tag is-success is-rounded">{{page.extra.oa_status}}</span> {% endif %}</p>
+    {% if page.extra.metadata.abstractNote %}
+    <h3 class="title is-5 has-text-weight-light mt-5">Abstract</h3>
+    <div class="content">
+        {{page.extra.metadata.abstractNote | safe}}
+    </div>
+
+    {% endif %}
+    {% if page.extra.versions %}
+
+    <h2 class="title is-4 has-text-weight-light mt-4">Other versions</h2>
+    {% set pdf_version = "" %}
+    {% set map = page.extra.versions | group_by(attribute="version_position") %}
+    {% set_global positions = [] %}
+    {% for position, ignored in map %}
+        {% set_global positions = [...positions, position] %}
+    {% endfor %}
+    {% for position in positions | sort %}
+      {% set versions = map[position] %}
+      {% set version_label = versions[0]["version"] %}
+      <div class="card mb-6">
+        <header class="card-header has-background-success">
+          <p class="card-header-title has-text-black-ter">open access: {{version_label}}</p>
+        </header>
+        {% for version in versions|sort(attribute="type_position") %}
+          {% if version.type == "pdf" and embedded != True %}
+          <div class="card-image">
+            <figure class="image is-3by4">
+                <div class="has-ratio" id="my-pdf"></div>
+            </figure>
+          </div>
+          <script src="{{get_url(path='pdfobject.min.js')}}"></script>
+          <script>PDFObject.embed("/{{version.url}}", "#my-pdf");</script>
+          {% set_global embedded = True %}
+          {% endif %}
+        {% endfor %}
+        <footer class="card-footer">
+          {% for version in versions|sort(attribute="type_position") %}
+            {% if version.type == "pdf" %}
+              <p class="card-footer-item"><span>Download:&nbsp;<a href="{{ get_url(path=version.url) }}" download>{{version.url}}</a></span></p>
+            {% else %}
+              <p class="card-footer-item"><span>View:&nbsp;<a href="{{ get_url(path=version.url) }}">{% if version.title %}{{version.title}}{% else %}{{version.url}}{% endif %}</a></span></p>
+            {% endif %}
+          {% endfor %}
+        </footer>
+      </div>
+    {% endfor %}
+    {% endif %}
+    </div>
+</div>
+  
+</div>
+
+{% endblock %}

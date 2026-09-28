@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><a href="{{ get_url(path='@/_index.md')}}">Home</a></li>
+      </ul>
+    </nav>
+    <h1 class="title is-1 mt-6 has-text-weight-light">Publications</h1>
+    {% set map = section.pages | group_by(attribute="extra.year") %}
+    {% set_global years = [] %}
+    {% for year, ignored in map %}
+        {% set_global years = [...years, year] %}
+    {% endfor %}
+    {% for year in years | sort | reverse %}
+        {% set pages = map[year] %}
+        <h2 class="title is-3 has-text-weight-light mb-2">{{year}}</h2>
+        <ul class="content">
+        {% for page in pages %}
+            <li class="is-size-6 mb-4">{{page.extra.citation_no_link | safe}}<br><div class="pt-1 has-text-right">{% if page.extra.oa_status %}<span class="tag is-success is-rounded">{{page.extra.oa_status}}</span> {% endif %}<a class="tag is-link is-rounded" href="{{ page.permalink }}">details <span class="icon"><i class="fa-solid fa-chevron-right"></i></span></a></div></li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+    
+  </div>
+</div>
+
+
+{% endblock%}
