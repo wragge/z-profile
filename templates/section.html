@@ -1,5 +1,13 @@
 {% extends "base.html" %}
-
+{% block meta %}
+{% set home = get_section(path="_index.md") %}
+{% set title = home.title ~ " - " ~ section.title %}
+<title>{{ title}}</title>
+<meta property="og:title" content="{{ title}}">
+<meta name="dc.title" content="{{ title}}">
+<meta name="dc.creator" content="{{ config.author }}">
+<link rel="canonical" href="{{ section.permalink }}">
+{% endblock %}
 {% block content %}
 <div class="columns">
   <div class="column is-half is-offset-one-quarter">

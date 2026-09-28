@@ -3,6 +3,41 @@
 {% block meta %}
 {% set home = get_section(path="_index.md") %}
 <title>{{home.title}} - {{ page.title }} - {{page.extra.date}}</title>
+<meta property="og:title" content="{{ page.title }}">
+<meta name="dc.title" content="{{ page.title }}">
+<meta name="citation_title" content="{{ page.title }}">
+<meta name="citation_date" content="{{ page.extra.date }}">
+<meta name="dc.date" content="{{ page.extra.date }}">
+{% set item_type = page.extra.metadata.itemType %}
+<meta property="zotero:itemType" content="{{ item_type }}">
+{% if item_type == "bookSection" %}
+  <meta name="citation_book_title" content="{{ page.extra.metadata.bookTitle }}">
+{% elif item_type == "journalArticle" %}
+  <meta name="citation_journal_title" content="{{ page.extra.metadata.publicationTitle }}">
+  <meta name="citation_volume" content="{{ page.extra.metadata.volume | default(value="")}}">
+  <meta name="citation_issue" content="{{ page.extra.metadata.issue | default(value="")}}">
+{% endif %}
+{% for creator in page.extra.metadata.creators %}
+  {% if "lastName" in creator %}
+    {% set name = creator.lastName ~ ", " ~ creator.firstName %}
+  {% else %}
+    {% set name = creator.name %}
+  {% endif %}
+  {% if creator.creatorType == "author" %}
+    <meta name="citation_author" content="{{ name }}">
+    <meta name="dc.creator" content="{{ name }}">
+  {% elif creator.creatorType == "editor" %}
+    <meta name="citation_editor" content="{{ name }}">
+  {% endif %}
+{% endfor %}
+{% if page.extra.metadata.pages %}
+  {% set pages = page.extra.metadata.pages | split(pat="-") %}
+  <meta name="citation_firstpage" content="{{pages[0]}}">
+  {% if pages | length == 2 %}
+    <meta name="citation_lastpage" content="{{pages[1]}}">
+  {% endif %}
+{% endif %}
+<link rel="canonical" href="{{ page.permalink }}">
 {% endblock meta %}
 
 {% block content %}
