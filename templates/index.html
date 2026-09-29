@@ -11,16 +11,20 @@
 {% block content %}
 <div class="columns">
   <div class="column is-half is-offset-one-quarter">
-    {% set image = resize_image(path=section.extra.portrait, width=250, height=250) %}
-    <div class="portrait">
-    <figure class="image is-1by1">
-        <img src="{{image.url}}" class="is-rounded">
-    </figure>
-  </div>
+    {% if section.extra.portrait %}
+      {% set image = resize_image(path=section.extra.portrait, width=250, height=250) %}
+      <div class="portrait">
+        <figure class="image is-1by1">
+            <img src="{{image.url}}" class="is-rounded">
+        </figure>
+      </div>
+    {% endif %}
     <h1 class="title is-1 mt-6 has-text-weight-light">
       {{ section.title }}
     </h1>
-    <h2 class="subtitle is-4">{{ section.extra.tagline}}</h2>
+    {% if section.extra.tagline %}
+      <h2 class="subtitle is-4">{{ section.extra.tagline }}</h2>
+    {% endif %}
     {% set icons = {"orcid": '<i class="fa-brands fa-orcid fa-xl"></i>', "mastodon": '<i class="fa-brands fa-mastodon fa-xl"></i>', "knowledge commons": '<img class="icon" src="kc.png"></a>'} %}
     {% if section.extra.email %}
       <a title="Email" href="mailto:{{section.extra.email}}" class="icon is-medium"><i class="fa-regular fa-envelope fa-xl"></i></a>

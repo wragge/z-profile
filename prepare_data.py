@@ -23,7 +23,7 @@ BASE_URL = os.getenv("BASE_URL", "/")
 zot = zotero.Zotero(ZOTERO_ID, "user", ZOTERO_KEY)
 
 
-# In[6]:
+# In[11]:
 
 
 OA_VERSIONS = {
@@ -134,8 +134,11 @@ def process_bio(item):
     extra_data = get_extra(item)
     bio_fm["extra"].update(extra_data)
     # Add the first attached note as the text of the home page
-    bio_note = zot.children(item["key"], itemType="note")[0]
-    cleaned_note = nh3.clean(bio_note["data"]["note"], tags={"b", "i", "p", "a", "ul", "li", "quote"})
+    try:
+        bio_note = zot.children(item["key"], itemType="note")[0]
+        cleaned_note = nh3.clean(bio_note["data"]["note"], tags={"b", "i", "p", "a", "ul", "li", "quote"})
+    except IndexError:
+        cleaned_note = ""
     return zola_config, bio_fm, cleaned_note
 
 def process_publication(item):
