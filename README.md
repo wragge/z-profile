@@ -101,7 +101,7 @@ You can choose to display a list of selected publications on the home page. Just
 
 ### 4. Add green open access versions
 
-> [!TIP] Understanding versions
+> [!TIP]
 > **Version of record**: The final published version of your work, as it appears in the book or journal. Unless the publication is open access, you're probably not allowed to share this.
 >
 > **Author Accepted Manuscript**: The version of your work after you have made any changes required by peer review, but before it is copy edited and formatted by the publisher. Under publishers' green open access or 'self archiving' policies, you can probably share this, though there may be restrictions.
@@ -123,3 +123,4 @@ You can choose to display a list of selected publications on the home page. Just
 ### Option 2: A web host with CPanel
 
 ## Updating your site
+
