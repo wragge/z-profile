@@ -26,3 +26,13 @@ jobs:
       uses: shalzz/zola-deploy-action@v0.23.6
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Create zip
+      uses: thedoctor0/zip-release@0.7.5
+      with:
+        type: 'zip'
+        filename: '../profile.zip'
+        directory: 'public'
+    - name: Commit zip
+      uses: EndBug/add-and-commit@v10
+        with:
+          add: 'profile.zip'
