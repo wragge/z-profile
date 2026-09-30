@@ -87,7 +87,7 @@
                 <div class="has-ratio" id="my-pdf"></div>
             </figure>
           </div>
-          <script src="{{get_url(path='pdfobject.min.js')}}"></script>
+          <script src="{{get_url(path='js/pdfobject.min.js')}}"></script>
           <script>PDFObject.embed("/{{version.url}}", "#my-pdf");</script>
           {% set_global embedded = True %}
           {% endif %}

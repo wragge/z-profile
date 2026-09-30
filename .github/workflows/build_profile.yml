@@ -1,11 +1,11 @@
-name: Zola on GitHub Pages
+name: Build Z-Profile site
 
 on: 
   workflow_dispatch:
 
 jobs:
   build:
-    name: Publish site
+    name: Build site
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -27,12 +27,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Create zip
-      uses: thedoctor0/zip-release@0.7.5
-      with:
-        type: 'zip'
-        filename: '../profile.zip'
-        directory: 'public'
+      run: (rm profile.zip; cd public; zip -r ../profile.zip *)
     - name: Commit zip
       uses: EndBug/add-and-commit@v10
-        with:
-          add: 'profile.zip'
+      with:
+        add: 'profile.zip'
