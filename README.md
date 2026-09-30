@@ -21,7 +21,7 @@ Z-Profile is really just some templates and a bit of data plumbing. It gets data
 
 One of the main reasons I created Z-Profile was to make it easier for researchers who want to share green open access versions of their publications. Publishers will often allow authors to make the author accepted manuscript (AAM) version of a publication available through a 'personal website' without any embargo. Using Z-Profile, you just attach a PDF of the AAM version to an item record in Zotero, and it will make your publication available for reading and download. It's a great way of getting your research out to the public as soon as possible.
 
-I also think it's important for researchers to have online profiles that are not wholly dependent on their employer or a company that wants to exploit their data – to have 'a domain of your own' (in the words of the excellent folks at Reclaim Hosting). Of course, there are some other great options for building a research profile. In particular, I'd strongly suggest you set yourself up on the Knowledge Commons. But having your own site, under your own domain, gives you extra control and flexibility.
+I also think it's important for researchers to have online profiles that are not wholly dependent on their employer or a company that wants to exploit their data – to have 'a domain of your own' (in the words of the excellent folks at [Reclaim Hosting](https://www.reclaimhosting.com)). Of course, there are some other great options for building a research profile. In particular, I'd strongly suggest you set yourself up on the [Knowledge Commons](https://hcommons.org). But having your own site, under your own domain, gives you extra control and flexibility.
 
 ## Requirements
 
