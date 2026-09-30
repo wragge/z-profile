@@ -92,13 +92,26 @@ Otherwise it will use a generic 'link' icon.
 
 ### 3. Add publications
 
-You might already have your publications in your Zotero library. If so, just drag them to the `z-profile` collection. If not, either capture them from the publisher's site using Zotero, or enter them manually. You can add as many publications to the collection as you want.
+You might already have your publications you want to include in your Zotero library. If so, just drag them to the `z-profile` collection. If not, either capture them from the publisher's site using Zotero, or enter them manually. You can add as many publications to the collection as you want.
 
 If the final, published version of a publication is open access (both free to read and download *and* openly licensed), add the tag `open access` to the Zotero item. This will add an open access badge when the item's details are displayed on the site.
 
 You can choose to display a list of selected publications on the home page. Just add the tag `selected` to any item you want to be included.
 
 ### 4. Add green open access versions
+
+If you have green open access versions of articles that you want to share through your site, you can attach PDF copies of the open access versions to publications, and/or point to their location in a repository. If you attach PDFs, they'll be embedded in the article page for easy reading.
+
+First add the publication to your collection (as described above). To attach a PDF right click on the Zotero item and select **'Add Attachment > File'**. Once it's added, tag the attachment to indicate the open access version type. The tag should be one of:
+
+* `aam`: author accepted manuscript
+* `preprint`: preprint
+
+**The PDF will only be added to your profile if it has one of these tags.**
+
+If your article is fully open access, you could also add a PDF of your version of record as an attachment and tag it `vor`. However, you might prefer that people access the publication through the publisher's site so that the download stats are collected.
+
+If you have a green open access version in a repository, you can add a link to it. Just right click on the Zotero item and select **'Add Attachment > Web Link'**. Once it's added, tag the attachment to indicate the open access version type as described above. You can also add a title to indicate the name of the repository.
 
 > [!TIP]
 > **Version of record**: The final published version of your work, as it appears in the book or journal. Unless the publication is open access, you're probably not allowed to share this online.
@@ -109,11 +122,63 @@ You can choose to display a list of selected publications on the home page. Just
 
 ### 5. Get your Zotero credentials
 
+Once you've added all your publications to your `z-profile` collection, it's time to build the site. First you need to gather some information from Zotero that will allow your site to access the collection data – an API key, and your user ID.
+
+* Go to the Zotero log in page and enter your details.
+* Once you're logged in, click on your account name in the top menu and select 'Settings'.
+* On the 'Settings' page click on 'Security' in the side menu.
+* Scroll down the 'Security' page until you get to the section headed 'Applications'.
+* Click on the **Create new private key** button.
+* Give your key a meaningful name, eg. `z-profile key`.
+* Under 'Personal Library', tick the boxes next to 'Allow library access' and 'Allow notes access'.
+* Click on the **Save Key** button.
+* Your API key will then be displayed – **copy it immediately** as it won't display again!
+* Back on the 'Security' page, look for the 'User ID' heading in the 'Applications' section and copy your user ID.
+
+Make sure you have your API key and user ID saved and ready, as you'll need to share them with GitHub.
+
 ### 6. Generate your GitHub repository
+
+Now you can create your own `z-profile` GitHub repository.
+
+* Make sure you're logged in to your GitHub account.
+* Go to the [Z-Profile GitHub repository](https://github.com/wragge/z-profile/).
+* Click on the green **Use this template** button and select 'Create a new repository'.
+* In the 'Repository name' box, enter a name that has the format `[your GitHub username].github.io`. My user name is `wragge`, so I'd enter `wragge.github.io`. Using this as a repository name will make it easy for you to publish your site using GitHub Pages.
+* Click on the green **Create repository button**
+
+You'll be redirected to your new repository.
 
 ### 7. Add your Zotero credentials to GitHub
 
+Now you need to add your Zotero credentials to your new repository so that it can access your data in Zotero.
+
+* Click on 'Settings'.
+* Click on 'Secrets and variables > Actions'.
+* Click on the green **New repository secret** button.
+* In the 'Name' box enter `ZOTERO_ID` and in the 'Secret' box enter your Zotero user ID.
+* Click on the green **Add secret** button to save it.
+* Now repeat this process to add a secret named `ZOTERO_KEY` that contains your Zotero API key.
+
+Under 'Repository secrets' you should now have two secrets named `ZOTERO_ID` and `ZOTERO_KEY`.
+
 ### 8. Run the GitHub action
+
+Ok, you're now all set. It's time to generate your site!
+
+* Click on 'Actions' in the top menu of your GitHub repository.
+* Click on 'Build Z-Profile site' in the left hand menu.
+* First click on the **Run workflow** dropdown and then click on the green **Run workflow** button.
+
+Z-Profile will now pull your data from Zotero and generate your site. To view the status of the current process, click on 'Actions' again. You'll see 'Build Z-Profile site' listed. Once the icon next to the action goes green, you'll know it's finished successfully.
+
+The process saves your site in two places – in the `gh-pages` branch of your repository, and in a zip file. To view them:
+
+* Click on 'Code' to go back to your repositories home page.
+* To download the zip file, click on 'profile.zip', then click on the download icon.
+* To view the files in the `gh-pages` branch, click on the 'main' dropdown and select `gh-pages`.
+
+Your site has now been generated, but it's not published yet.
 
 ## Publishing your site
 
@@ -123,3 +188,11 @@ You can choose to display a list of selected publications on the home page. Just
 
 ## Updating your site
 
+To update your site:
+
+* Make your changes in Zotero (you can change your bio information and add or remove publications).
+* Run the GitHub action again.
+
+If you're publishing through GitHub pages you don't need to do anything else. Your updated site will be published automatically.
+
+If you're using another web host you'll need to download the zip file and upload it to your host, replacing any existing files.
