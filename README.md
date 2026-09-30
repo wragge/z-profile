@@ -9,7 +9,6 @@ Example site: <https://wragge.github.io>
 * Automatically generates a personal home page with biographical note, photo, social media accounts, and selected publications.
 * Individual page for each publication, with embedded PDF viewer for attached green open access versions.
 * Embedded metadata in publication pages for easy capture by Zotero.
-* Atom feed with new or updated publication pages.
 * Generates a static site that can be published using GitHub Pages or any web host.
 
 ## What is Z-Profile?
@@ -102,7 +101,7 @@ You can choose to display a list of selected publications on the home page. Just
 ### 4. Add green open access versions
 
 > [!TIP]
-> **Version of record**: The final published version of your work, as it appears in the book or journal. Unless the publication is open access, you're probably not allowed to share this.
+> **Version of record**: The final published version of your work, as it appears in the book or journal. Unless the publication is open access, you're probably not allowed to share this online.
 >
 > **Author Accepted Manuscript**: The version of your work after you have made any changes required by peer review, but before it is copy edited and formatted by the publisher. Under publishers' green open access or 'self archiving' policies, you can probably share this, though there may be restrictions or conditions.
 >

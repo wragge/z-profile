@@ -26,7 +26,6 @@ jobs:
       uses: shalzz/zola-deploy-action@v0.23.6
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - run: rm -rf public/.git
     - name: Create zip
       run: (rm profile.zip; cd public; zip -r ../profile.zip *)
     - name: Commit zip
