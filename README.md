@@ -1,6 +1,6 @@
 # Z-Profile
 
-Build your own research profile using Zola and Zotero.
+Build your own research profile using [Zola](https://www.getzola.org) and [Zotero](https://www.zotero.org/).
 
 Example site: <https://wragge.github.io>
 
@@ -27,8 +27,8 @@ I also think it's important for researchers to have online profiles that are not
 
 To use Z-Profile you need:
 
-* Zotero installed and synced to a free Zotero online account
-* a free GitHub account
+* [Zotero](https://www.zotero.org/) installed and synced to a free Zotero online account
+* a [free GitHub account](https://github.com/join)
 
 ## Building your site
 
@@ -182,9 +182,29 @@ Your site has now been generated, but it's not published yet.
 
 ## Publishing your site
 
+Z-Profile builds a 'static' site – it's basically just a collection of HTML files, with associated assets, that can be published on almost any web server. Here's a couple of options.
+
+I'll be adding some more documentation to this section.
+
 ### Option 1: GitHub Pages
 
+Publishing on GitHub Pages is quick and easy, but might not be the best long-term option.
+
+* Go to your Z-Profile GitHub repository (where your files were generated)
+* Click on 'Settings'.
+* Click on 'Pages'.
+* Look at the 'Build and deployment' section.
+* Under 'Source' select 'Deploy from a branch'.
+* Under 'Branch' select `gh-pages` from the first dropdown.
+* Click on the **Save** button.
+
+A process will run to publish your site, you can check the status by clicking on 'Actions'. Once it's finished you can visit your site by pointing your browser at: `[your GitHub username].github.io`. You'll notice that the web address is the same as the repository name. My GitHub username is `wragge`, so my site is at <https://wragge.github.io>.
+
+But, of course, we've learnt not to trust in the longevity of tech services. Who knows how long GitHub (owned by Microsoft) will continue to support GitHub Pages? To guard against this danger, and to assert your own online identity, I'd strongly suggest you register a domain name and [link it to your GitHub Pages site](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages). That way you can move your site at any time without breaking any links. Unfortunately, this does add to the complexity, as you'll need to register your domain with a domain registrar, update your domain records to point to your GitHub site, and then make some changes to your GitHub repository.
+
 ### Option 2: A web host with CPanel
+
+Many web hosting companies, such as [Reclaim Hosting](https://www.reclaimhosting.com), can quickly set you up with a domain name and a CPanel account. Using CPanel's file manager you can upload the `profile.zip` and extract the files into the `public_html` folder.
 
 ## Updating your site
 
@@ -193,6 +213,6 @@ To update your site:
 * Make your changes in Zotero (you can change your bio information and add or remove publications).
 * Run the GitHub action again.
 
-If you're publishing through GitHub pages you don't need to do anything else. Your updated site will be published automatically.
+If you're publishing through GitHub Pages you don't need to do anything else. Your updated site will be published automatically.
 
 If you're using another web host you'll need to download the zip file and upload it to your host, replacing any existing files.
