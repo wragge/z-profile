@@ -47,6 +47,8 @@ That's the bare minimum and will produce a site that just has your name and noth
 
 Once you have an item tagged `bio` you can add additional information and attachments to it.
 
+![](https://updates.timsherratt.org/uploads/2026/zotero-bio-item.png)
+
 #### Tag line
 
 Add a one line introduction to yourself in Zotero's 'Short Title' field. For example: `Historian and hacker`, or `Associate Professor at the University of Tasmania`.
@@ -129,11 +131,16 @@ Once you've added all your publications to your `z-profile` collection, it's tim
 * On the 'Settings' page click on 'Security' in the side menu.
 * Scroll down the 'Security' page until you get to the section headed 'Applications'.
 * Click on the **Create new private key** button.
+
+![](https://updates.timsherratt.org/uploads/2026/zotero-newapi-key.png)
+
 * Give your key a meaningful name, eg. `z-profile key`.
 * Under 'Personal Library', tick the boxes next to 'Allow library access' and 'Allow notes access'.
 * Click on the **Save Key** button.
 * Your API key will then be displayed – **copy it immediately** as it won't display again!
 * Back on the 'Security' page, look for the 'User ID' heading in the 'Applications' section and copy your user ID.
+
+![](https://updates.timsherratt.org/uploads/2026/zotero-api-key.png)
 
 Make sure you have your API key and user ID saved and ready, as you'll need to share them with GitHub.
 
@@ -147,6 +154,8 @@ Now you can create your own `z-profile` GitHub repository.
 * In the 'Repository name' box, enter a name that has the format `[your GitHub username].github.io`. My user name is `wragge`, so I'd enter `wragge.github.io`. Using this as a repository name will make it easy for you to publish your site using GitHub Pages.
 * Click on the green **Create repository button**
 
+![](https://updates.timsherratt.org/uploads/2026/z-profile-create-repo.png)
+
 You'll be redirected to your new repository.
 
 ### 7. Add your Zotero credentials to GitHub
@@ -155,12 +164,20 @@ Now you need to add your Zotero credentials to your new repository so that it ca
 
 * Click on 'Settings'.
 * Click on 'Secrets and variables > Actions'.
+
+![](https://updates.timsherratt.org/uploads/2026/github-secrets.png)
+
 * Click on the green **New repository secret** button.
 * In the 'Name' box enter `ZOTERO_ID` and in the 'Secret' box enter your Zotero user ID.
+
+![](https://updates.timsherratt.org/uploads/2026/github-add-secret.png)
+
 * Click on the green **Add secret** button to save it.
 * Now repeat this process to add a secret named `ZOTERO_KEY` that contains your Zotero API key.
 
 Under 'Repository secrets' you should now have two secrets named `ZOTERO_ID` and `ZOTERO_KEY`.
+
+![](https://updates.timsherratt.org/uploads/2026/github-zotero-secrets.png)
 
 ### 8. Run the GitHub action
 
