@@ -25,15 +25,21 @@
     {% if section.extra.tagline %}
       <h2 class="subtitle is-4">{{ section.extra.tagline }}</h2>
     {% endif %}
-    {% set kc_icon_path = get_url(path='icons/kc.png') %}
-    {% set icons = {"orcid": '<i class="fa-brands fa-orcid fa-xl"></i>', "mastodon": '<i class="fa-brands fa-mastodon fa-xl"></i>', "knowledge commons": '<img class="icon" src="icons/kc.png"></a>', "bluesky": '<i class="fa-brands fa-bluesky fa-xl"></i>', "github": '<i class="fa-brands fa-github fa-xl"></i>', "linkedin": '<i class="fa-brands fa-linkedin"></i>'} %}
-    {% if section.extra.email %}
-      <a title="Email" href="mailto:{{section.extra.email}}" class="icon is-medium"><i class="fa-regular fa-envelope fa-xl"></i></a>
+    {% if section.extra.email or section.extra.links %}
+      <div class="block">
+        {% set icons = {"orcid": '<i class="fa-brands fa-orcid fa-xl"></i>', "mastodon": '<i class="fa-brands fa-mastodon fa-xl"></i>', "knowledge commons": '<img class="icon" src="icons/kc.png"></a>', "bluesky": '<i class="fa-brands fa-bluesky fa-xl"></i>', "github": '<i class="fa-brands fa-github fa-xl"></i>', "linkedin": '<i class="fa-brands fa-linkedin"></i>'} %}
+
+        {% if section.extra.email %}
+          <a title="Email" href="mailto:{{section.extra.email}}" class="icon is-medium"><i class="fa-regular fa-envelope fa-xl"></i></a>
+        {% endif %}
+
+        {% for link in section.extra.links %}  
+          <a title="{{link.account}}" href="{{link.url}}" class="icon is-medium">{% if link.account|lower in icons %}{{icons[link.account|lower]|safe}}{% else %}<i class="fa-solid fa-link is-size-5"></i>{% endif %}</a>
+        {% endfor %}
+      </div>
     {% endif %}
-    {% for link in section.extra.links %}  
-      <a title="{{link.account}}" href="{{link.url}}" class="icon is-medium">{% if link.account|lower in icons %}{{icons[link.account|lower]|safe}}{% else %}<i class="fa-solid fa-link is-size-5"></i>{% endif %}</a>
-    {% endfor %}
-    <div class="content is-size-5 mt-6">
+
+    <div class="content is-size-5 mt-4">
         {{section.content | safe}}
     </div>
     {% if section.extra.cv %}
@@ -46,16 +52,16 @@
     {% set map = articles | group_by(attribute="selected") %}
     {% set selected = map[true] %}
     {% if selected %}
-      <h3 class="title is-4 mt-6 has-text-weight-light">Selected publications</h3>
+      <h3 class="title is-4 mt-6 has-text-weight-light block">Selected publications</h3>
       <ul class="mt-2 content">
       {% for article in selected | sort(attribute="year") | reverse %}
         {% set article_path = "@/publications/" ~ article.filename %}
-        <li class="mb-5 is-size-6"><div>{{article.citation | safe}} &nbsp;<a href="{{ get_url(path=article_path) }}">details<span class="icon"><i class="fa-solid fa-chevron-right"></i></span></a><div>{% if article.oa_status %}<div class="mt-2"><span class="tag is-success is-rounded">{{article.oa_status}}</span></div>{% endif %}</li>
+        <li class="mb-5 is-size-6 block"><div>{{article.citation | safe}} &nbsp;<a href="{{ get_url(path=article_path) }}">details<span class="icon"><i class="fa-solid fa-chevron-right"></i></span></a><div>{% if article.oa_status %}<div class="mt-2"><span class="tag is-success is-rounded">{{article.oa_status}}</span></div>{% endif %}</li>
       {% endfor %}
       </ul>
       <p><a class="is-size-4 has-text-weight-light" href="{{ get_url(path='@/publications/_index.md')}}">More publications <span class="icon"><i class="fa-solid fa-chevron-right"></i></span></a></p>
     {% elif articles %}
-      <h3 class="title is-4 mt-6 has-text-weight-light"><a class="is-size-4" href="{{ get_url(path='@/publications/_index.md')}}">Publications <span class="icon"><i class="fa-solid fa-chevron-right"></i></span></a></h3>
+      <h3 class="title is-4 mt-6 has-text-weight-light block"><a class="is-size-4" href="{{ get_url(path='@/publications/_index.md')}}">Publications <span class="icon"><i class="fa-solid fa-chevron-right"></i></span></a></h3>
     {% endif %}
   </div>
 </div>

@@ -97,7 +97,7 @@
             {% if version.type == "pdf" %}
               <p class="card-footer-item"><span>Download:&nbsp;<a href="{{ get_url(path=version.url) }}" download>{{version.url}}</a></span></p>
             {% else %}
-              <p class="card-footer-item"><span>View:&nbsp;<a href="{{ get_url(path=version.url) }}">{% if version.title %}{{version.title}}{% else %}{{version.url}}{% endif %}</a></span></p>
+              <p class="card-footer-item"><span>View:&nbsp;<a href="{{ version.url }}">{% if version.title %}{{version.title}}{% else %}{{version.url}}{% endif %}</a></span></p>
             {% endif %}
           {% endfor %}
         </footer>
