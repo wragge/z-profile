@@ -21,7 +21,7 @@ ZOTERO_ID = os.getenv("ZOTERO_ID", "")
 BASE_URL = os.getenv("BASE_URL", "/")
 
 
-# In[35]:
+# In[37]:
 
 
 OA_VERSIONS = {
@@ -108,7 +108,9 @@ class ZProfileBuilder:
         # Zola config defaults
         zola_config = {
             "base_url": BASE_URL,
-            "generate_feeds": True
+            # Need a proper base url for this to work
+            # TO DO: option to add domain to Zotero bio
+            "generate_feeds": False
         }
         accounts = []
         # Get name from creators
@@ -213,7 +215,7 @@ class ZProfileBuilder:
         self.process_items(items)
 
 
-# In[36]:
+# In[38]:
 
 
 if __name__ == "__main__":
