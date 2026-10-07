@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[18]:
+# In[25]:
 
 
 from pyzotero import zotero
@@ -21,7 +21,7 @@ ZOTERO_ID = os.getenv("ZOTERO_ID", "")
 BASE_URL = os.getenv("BASE_URL", "/")
 
 
-# In[19]:
+# In[35]:
 
 
 OA_VERSIONS = {
@@ -162,9 +162,9 @@ class ZProfileBuilder:
         # This date will be used in the RSS feed
         pub_fm["date"] = item["data"]["dateModified"]
         # Publication date
-        pub_fm["extra"]["date"] = item["meta"]["parsedDate"]
+        pub_fm["extra"]["date"] = item["meta"].get("parsedDate", "")
          # Publication year for grouping
-        pub_fm["extra"]["year"] = int(item["meta"]["parsedDate"][:4])
+        pub_fm["extra"]["year"] = item["meta"].get("parsedDate", "")[:4]
         # Add other values to front matter
         pub_fm["extra"]["metadata"] = item["data"]
         # Set default OA status
@@ -183,7 +183,7 @@ class ZProfileBuilder:
         pub_fm["extra"]["oa_status"] = oa_status
         pub_fm["extra"]["versions"] = versions
         selected = True if "selected" in tags else False
-        article = {"filename": filename, "citation": pub_fm["extra"]["citation_no_link"], "oa_status": oa_status,"selected": selected, "year": int(item["meta"]["parsedDate"][:4])}
+        article = {"filename": filename, "citation": pub_fm["extra"]["citation_no_link"], "oa_status": oa_status,"selected": selected, "year": pub_fm["extra"]["year"]}
         return pub_fm, article, filename
 
     def process_items(self, items):
@@ -213,7 +213,7 @@ class ZProfileBuilder:
         self.process_items(items)
 
 
-# In[24]:
+# In[36]:
 
 
 if __name__ == "__main__":
