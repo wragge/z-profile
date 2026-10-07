@@ -16,6 +16,12 @@
   <meta name="citation_journal_title" content="{{ page.extra.metadata.publicationTitle }}">
   <meta name="citation_volume" content="{{ page.extra.metadata.volume | default(value="")}}">
   <meta name="citation_issue" content="{{ page.extra.metadata.issue | default(value="")}}">
+{% elif item_type == "conferencePaper" %}
+  <meta name="citation_book_title" content="{{ page.extra.metadata.proceedingsTitle }}">
+  <meta name="citation_conference_title" content="{{ page.extra.metadata.conferenceName }}">
+{% endif %}
+{% if page.extra.metadata.publisher %}
+  <meta name="citation_publisher" content="{{ page.extra.metadata.publisher }}">
 {% endif %}
 {% for creator in page.extra.metadata.creators %}
   {% if "lastName" in creator %}
