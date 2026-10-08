@@ -58,4 +58,4 @@ If you're willing to pay a small amount for a web hosting account (or already ha
 
 ## Licence
 
-Z-Profile was created by [Tim Sherratt](https://timsherratt.au) in 2026. All original code is dedicated to the public domain under a CC0 1.0 Universal Deed.
+Z-Profile was created by [Tim Sherratt](https://timsherratt.au) in 2026. All original code and documentation is dedicated to the public domain under a CC0 1.0 Universal Deed.
