@@ -55,3 +55,7 @@ Once you've built your site, you'll have a collection of HTML files and associat
 But, of course, we've learnt not to trust in the longevity of tech services. Who knows how long GitHub (owned by Microsoft) will continue to support GitHub Pages? Also, using a custom domain name adds considerably to the complexity.
 
 If you're willing to pay a small amount for a web hosting account (or already have access to a web server), you'll probably find [self-hosting an easier option overall](https://wraggelabs.com/z-profile-docs/web-host-publish/). Many web hosting companies, such as [Reclaim Hosting](https://www.reclaimhosting.com/), can quickly set you up with your own domain name and a CPanel account. Then it's just a matter of uploading your site to their servers.
+
+## Licence
+
+Z-Profile was created by [Tim Sherratt](https://timsherratt.au) in 2026. All original code is dedicated to the public domain under a CC0 1.0 Universal Deed.
