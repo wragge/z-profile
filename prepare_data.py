@@ -21,7 +21,7 @@ ZOTERO_ID = os.getenv("ZOTERO_ID", "")
 BASE_URL = os.getenv("BASE_URL", "/")
 
 
-# In[37]:
+# In[49]:
 
 
 OA_VERSIONS = {
@@ -102,6 +102,19 @@ class ZProfileBuilder:
                 break
         return has_bio
 
+    def split_label(self, item_type):
+        split = 0
+        for i, l in enumerate(item_type):
+            if l.isupper():
+                split = i
+                break
+        if split > 0:
+            label = f"{item_type[:split]}-{item_type[split:]}".lower()
+        else:
+            label = item_type
+        return label
+
+
     def process_bio(self, item):
         # Container for front matter for index page
         bio_fm = {"extra":{}}
@@ -167,6 +180,7 @@ class ZProfileBuilder:
         pub_fm["extra"]["date"] = item["meta"].get("parsedDate", "")
          # Publication year for grouping
         pub_fm["extra"]["year"] = item["meta"].get("parsedDate", "")[:4]
+        pub_fm["extra"]["type_label"] = self.split_label(item["data"]["itemType"])
         # Add other values to front matter
         pub_fm["extra"]["metadata"] = item["data"]
         # Set default OA status
@@ -215,16 +229,10 @@ class ZProfileBuilder:
         self.process_items(items)
 
 
-# In[38]:
+# In[50]:
 
 
 if __name__ == "__main__":
     builder = ZProfileBuilder(ZOTERO_ID, ZOTERO_KEY)
     builder.build_site()
-
-
-# In[ ]:
-
-
-
 

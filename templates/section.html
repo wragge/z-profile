@@ -8,6 +8,9 @@
 <meta name="dc.creator" content="{{ config.author }}">
 <link rel="canonical" href="{{ section.permalink }}">
 {% endblock %}
+{% block extrajs %}
+<script src="{{get_url(path='js/script.js')}}" defer></script>
+{% endblock %}
 {% block content %}
 <div class="columns">
   <div class="column is-half is-offset-one-quarter">
@@ -17,6 +20,24 @@
       </ul>
     </nav>
     <h1 class="title is-1 mt-6 has-text-weight-light">Publications</h1>
+  </div>
+</div>
+<div class="columns">
+    <div class="column is-one-quarter">
+    <h3 class="is-4">Filters</h3>
+    <ul class="">
+    {% set map = section.pages | group_by(attribute="extra.type_label") %}
+    {% set_global types = [] %}
+    {% for type, ignored in map %}
+      {% set_global types = [...types, type] %}
+    {% endfor %}
+    {% for type in types | sort %}
+      {% set items = map[type] %}
+      <li class="mt-1"><span class="tag is-info is-rounded filter is-hoverable" data-filter="{{type}}">{{type|replace(from="-", to=" ")}}: {{items | length}}</span></li>
+    {% endfor %}
+    </ul>
+  </div>
+  <div class="column is-half ">
     {% set map = section.pages | group_by(attribute="extra.year") %}
     {% set_global years = [] %}
     {% for year, ignored in map %}
@@ -27,13 +48,11 @@
         <h2 class="title is-3 has-text-weight-light mb-2 mt-6">{{year|default(value="No date", boolean=true)}}</h2>
         <ul class="content">
         {% for page in pages %}
-            <li class="is-size-6 mb-4"><div>{{page.extra.citation_no_link | safe}} <a class="details-link" href="{{ page.permalink }}">details<span class="icon"><i class="fa-solid fa-chevron-right"></i></span></a></div>{% if page.extra.oa_status %}<div class="mt-2"><span class="tag is-success is-rounded">{{page.extra.oa_status}}</span></div>{% endif %}</li>
+            <li class="is-size-6 mb-4 {{page.extra.type_label}} publication"><div>{{page.extra.citation_no_link | safe}} <a class="details-link" href="{{ page.permalink }}">details<span class="icon"><i class="fa-solid fa-chevron-right"></i></span></a></div><div class="mt-2">{% if page.extra.oa_status %}<span class="tag is-success is-rounded">{{page.extra.oa_status}}</span> {% endif %}<span class="tag is-info is-rounded">{{page.extra.type_label|replace(from="-", to=" ")}}</span></div></li>
         {% endfor %}
-    </ul>
+        </ul>
     {% endfor %}
-    
   </div>
 </div>
 
-
-{% endblock%}
+{% endblock %}
