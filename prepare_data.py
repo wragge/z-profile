@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[25]:
+# In[1]:
 
 
 from pyzotero import zotero
@@ -21,13 +21,16 @@ ZOTERO_ID = os.getenv("ZOTERO_ID", "")
 BASE_URL = os.getenv("BASE_URL", "/")
 
 
-# In[49]:
+# In[2]:
 
 
 OA_VERSIONS = {
-    "vor": {"name": "version of record", "position": 1},
-    "aam": {"name": "author accepted manuscript", "position": 2},
-    "preprint": {"name": "preprint", "position": 3}
+    "vor": {"name": "published version", "position": 1},
+    "aam": {"name": "accepted version", "position": 2},
+    "preprint": {"name": "submitted version", "position": 3},
+    "published": {"name": "published version", "position": 1},
+    "accepted": {"name": "accepted version", "position": 2},
+    "submitted": {"name": "submitted version", "position": 3}
 }
 
 TESTING = False
@@ -190,7 +193,7 @@ class ZProfileBuilder:
         # Get attachments to look for OA versions
         versions = []
         attachments = self.zot.children(item["key"], itemType="attachment")
-        for version_type in ["vor", "aam", "preprint"]:
+        for version_type in ["published", "vor", "accepted", "aam", "submitted", "preprint"]:
             version = self.get_version(attachments, version_type)
             if version:
                 versions.extend(version)
@@ -229,10 +232,16 @@ class ZProfileBuilder:
         self.process_items(items)
 
 
-# In[50]:
+# In[3]:
 
 
 if __name__ == "__main__":
     builder = ZProfileBuilder(ZOTERO_ID, ZOTERO_KEY)
     builder.build_site()
+
+
+# In[ ]:
+
+
+
 
